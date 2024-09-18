@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: ps-plugin
+Version: 1.0.0
+Summary: Test macros library for macros plugin
+Author: Gleb Morgachev
+License: MIT
