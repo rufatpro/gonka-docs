@@ -1,67 +1,45 @@
 site_name: ""
-site_url: https://docs.productscience.app
-repo_url: https://docs.productscience.app
-edit_uri: edit/main/docs
-copyright: Copyright Product Science Inc. All rights reserved.
+site_url: https://gonka.ai/
+edit_uri: ""
 site_description: >-
-  Learn to configure and use Product Science
+  Learn to configure and use Gonka network
 
 # Content
 nav:
   - Home: index.md
-  - Capabilities:
-    - Text Generation Test: Capabilities/Text-generation.md
-  - CodeTuner for Cloud:
-      - Overview: cloud/overview.md
-      - Integration:
-          -  Common: cloud/integration/integration.md
-          - JVM Agent: cloud/integration/jvm-agent.md
-      - Usage: cloud/usage.md
-      - Release Notes:
-          -  Supported JAVA frameworks: cloud/release-notes/release-note-1.md
-  - CodeTuner for Mobile:
-      - Overview: mobile/overview.md
-      - Integration:
-          - Android:
-              - Build / Gradle: mobile/integration/android/gradle.md
-              - CICD / Gradle: mobile/integration/android/cicd.md
-              - CLI Tool: mobile/integration/android/cli-tool.md
-              - Integration FAQ: mobile/integration/android/integration-faq-android.md
-              - User Flow Annotation: mobile/integration/android/user-flow.md
-          - iOS:
-              - Build / Xcode: mobile/integration/ios/xcode.md
-              - Build / Bazel: mobile/integration/ios/bazel.md
-              - App Distribution: mobile/integration/ios/distribution.md
-      - Device Set-Up:
-          - Android: mobile/device-set-up/android.md
-          - iOS: mobile/device-set-up/ios.md
-      - Record + Upload:
-          - Android: mobile/record-n-upload/android.md
-          - iOS: mobile/record-n-upload/ios.md
-      - Release Notes:
-          - Frame Drop Visualization for Android: mobile/release-notes/Frame-Drop-Visualization-for-Android.md
-          - Product Analytic Tags: mobile/release-notes/Product-Analytic-Tags.md
-          - Quick Start Guide: mobile/release-notes/Quick-Start-Guide.md
-          - R1.4 - Annotations: mobile/release-notes/R1.4-Annotations.md
-          - R1.3 - Video: mobile/release-notes/R1.3-Video.md
-          - R1.2 - Admin: mobile/release-notes/R1.2-Admin.md
-          - R1.1 - New UX & UI: mobile/release-notes/R1.1-New-UX-&-UI.md
-
-
-  - Regression Analysis:
-      - Overview: ra/overview.md
-      - API: ra/api.md
-      - cURL example: ra/example.md
-
-
-
+  - Introduction: introduction.md
+  - Developer:
+    - Quickstart: developer/quickstart.md
+    - Details: developer/details.md
+  - Host:
+    - Quickstart: host/quickstart.md
+    - Multiple nodes: host/multiple-nodes.md
+    - Network Node API: host/network-node-api.md
+    - Key management: host/key-management.md
+    - Access account: host/access-account.md
+    - Benchmark to choose optimal deployment config for LLMs: host/benchmark-to-choose-optimal-deployment-config-for-llms.md
+    - Hardware specifications: host/hardware-specifications.md
+    - Genesis: host/genesis.md
+    - How to edit Host public info: host/host_info.md
+    - SSL setup: host/optional-ssl-setup.md
+  - Wallet:
+    - Dashboard: wallet/dashboard.md
+    - Wallet & transfer guide: wallet/wallet-and-transfer-guide.md
+    - Pricing: wallet/pricing.md
+  - Model licenses: model-licenses.md
+  - Transactions & governance: transactions-and-governance.md
+  - Software upgrades: software-upgrades.md
+  - Help:
+    - FAQ: FAQ.md
+    - Errors: Errors.md
+    - Get help: help.md
 
 # Visual
 theme:
   name: material
+  favicon: images/01-favicon.png
+  logo: images/logos/gonka.svg
   custom_dir: overrides
-  logo: images/logo-text.svg
-  favicon: images/Icon.png
   font:
     text: Manrope
   palette:
@@ -83,15 +61,14 @@ theme:
   include_search_page: false
   language: en
   features:
-    - navigation.tabs
-    - navigation.instant
+    - navigation.sections
     - navigation.expand
     - navigation.top
     - content.code.annotate
+    - content.code.copy
     - navigation.indexes
     - navigation.tracking
     - search.suggest
-#    - toc.integrate
 
 markdown_extensions:
   - footnotes
@@ -99,7 +76,6 @@ markdown_extensions:
   - attr_list
   - toc
   # https://facelessuser.github.io/pymdown-extensions/
-  - pymdownx.tabbed
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.inlinehilite
@@ -114,33 +90,69 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - js/links.js
+
 plugins:
   - minify:
       minify_html: false
-  - search
-  - macros:
-      modules: ["ps-plugin"]
+  - search:
+      separator: '[\\s-]+'
+      lang:
+        - en
+        - zh
   - mkdocs-video:
       is_video: true
       video_muted: true
       video_controls: true
       css_style:
         width: "50%"
-  - redirects:
-      redirect_maps:
-        'integration/android/gradle.md': 'mobile/integration/android/gradle.md'
-        'integration/android/cicd.md': 'mobile/integration/android/cicd.md'
-        'integration/android/cli-tool.md': 'mobile/integration/android/cli-tool.md'
-        'integration/android/integration-faq-android.md': 'mobile/integration/android/integration-faq-android.md'
-        'integration/android/user-flow.md': 'mobile/integration/android/user-flow.md'
-        'integration/ios/xcode.md': 'mobile/integration/ios/xcode.md'
-        'integration/ios/bazel.md': 'mobile/integration/ios/bazel.md'
-        'integration/ios/distribution.md': 'mobile/integration/ios/distribution.md'
-        'record-n-upload/ios.md': 'mobile/record-n-upload/ios.md'
-        'device-set-up/ios.md': 'mobile/device-set-up/ios.md'
-        'device-set-up/android.md': 'mobile/device-set-up/android.md'
+  - i18n:
+      reconfigure_material: true
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+        - locale: zh
+          name: 中文
+          build: true
+          nav_translations:
+            Home: 首页
+            Introduction: 介绍
+            Developer: 开发者
+            Quickstart: 快速上手
+            Details: 细节
+            Host: 节点
+            "Multiple nodes": 多节点
+            "Network Node API": 网络节点 API
+            "Key Management": 密钥管理
+            "Access account": 访问账户
+            "Benchmark to Choose Optimal Deployment Config for LLMs": LLM 部署配置基准
+            "Hardware Specifications": 硬件规格
+            Genesis: 创世
+            "How to edit validator public info": 编辑验证者公开信息
+            SSL setup: SSL 设置
+            Wallet: 钱包
+            Dashboard: 仪表盘
+            "Wallet & Transfer Guide": 钱包与转账指南
+            Pricing: 价格
+            "Model licenses": 模型许可
+            "Transactions & Governance": 交易与治理
+            "Software Upgrades": 软件升级
+            Help: 帮助
+            FAQ: 常见问题
+            Errors: 错误
+            "Get help": 获取支持
+
+strict: true
+
+validation:
+  links:
+    absolute_links: ignore
 
 extra:
-  social:
-    - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/company/product-science-inc/
+  analytics:
+    provider: google
+    property: G-JWVG5X6CY5
